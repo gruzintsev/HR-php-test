@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Product;
-use App\Order;
+use App\Models\Product;
+use App\Models\Order;
 
 class OrdersProductsTableSeeder extends Seeder
 {
@@ -16,17 +16,17 @@ class OrdersProductsTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         $limit = 1000;
-	
+
         $products = Product::get();
         $orders = Order::get();
-			
+
         for ($orderId = 1; $orderId <= $limit; $orderId++) {
             $pLimit = rand(1,4);
             $order = $orders->where('id', $orderId)->first();
-            
+
 			for ($productsOrderCnt = 1; $productsOrderCnt <= $pLimit; $productsOrderCnt++) {
 				$product = $products->random();
-				\DB::table('order_products')->insert([				
+				\DB::table('order_products')->insert([
 					'order_id' => $orderId,
 					'product_id' => $product->id,
 					'quantity' => rand(1,3),

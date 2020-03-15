@@ -12,5 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.main');
+});
+
+Route::resource('orders', 'OrderController')->only(['index', 'edit', 'update']);
+
+Route::prefix('products')->group(function () {
+    Route::get('/', 'ProductController@index')->name('products.index');
+    Route::post('change-price/{product}', 'ProductController@changePrice')->name('products.change-price');
+});
+
+Route::prefix('weather')->group(function () {
+    Route::get('{city}', 'WeatherController@index')->name('weather');
 });

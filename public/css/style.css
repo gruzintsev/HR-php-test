@@ -1,0 +1,9 @@
+.brand-logo {
+    width: 17.7rem;
+    height: 3.7rem;
+    background: url(https://flor2u.ru/flor/images/logo.svg) no-repeat 50%;
+    background-size: contain;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: .3rem;
+}

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Product;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -23,7 +25,16 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::bind(
+            'product',
+            function ($productId) {
+                if (!$product = Product::find(intval($productId))) {
+                    abort(Response::HTTP_NOT_FOUND, "Product with ID $productId is not exists");
+                }
+
+                return $product;
+            }
+        );
 
         parent::boot();
     }
